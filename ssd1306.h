@@ -6,5 +6,7 @@
 void oledInit(void);
 void drawPixel(int x, int y);
 void clearDisplay(void);
+void clearBuffer(void);
+void sendBuffer(void);
 
 #endif
