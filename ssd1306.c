@@ -14,9 +14,11 @@ static void oledCommand(uint8_t cmd) { // commands/data differentiated by 0x00/0
     i2c_master_transmit(oled, load, 2, -1);
 };
 
-static void oledData(uint8_t *data) { // two transmits saves having to put 0x40 at the start of each row
-    i2c_master_transmit(oled, &dataPrefix, 1, -1);
-    i2c_master_transmit(oled, data, 128, -1);
+static void oledData(uint8_t *data) { // best to send everything in one transmit to avoid horror
+    uint8_t load[129];
+    load[0] = 0x40;
+    memcpy(&load[1], data, 128);
+    i2c_master_transmit(oled, load, 129, -1);
 };
 
 void oledInit(void) {
