@@ -90,9 +90,7 @@ void sendBuffer() {
 };
 
 void clearBuffer() {
-    for (int i = 0; i < 8; i++) {
-        memset(buffer, 0, sizeof buffer);
-    };
+    memset(buffer, 0, sizeof buffer);
 };
 
 void drawPixel(int x, int y) {
