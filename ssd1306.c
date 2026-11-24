@@ -100,7 +100,6 @@ void drawPixel(int x, int y) {
 };
 
 void drawSquare(int x, int y, int w, int h) {
-    uint8_t fill = 0xFF;
     uint8_t upper = 0xFF << (y % 8);
     uint8_t lower = (1 << ((y + h - 1) % 8 + 1)) - 1;
 
@@ -108,6 +107,7 @@ void drawSquare(int x, int y, int w, int h) {
     int lastPage = (y + h - 1) / 8;
 
     for (int page = firstPage; page <= lastPage; page++) {
+        uint8_t fill = 0xFF;
         if (page == firstPage) {
             fill &= upper;
         } else if (page == lastPage) {
