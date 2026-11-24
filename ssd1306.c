@@ -98,3 +98,24 @@ void drawPixel(int x, int y) {
     byte <<= (y % 8); // move the 1 into position
     buffer[y / 8][x] |= byte;
 };
+
+void drawSquare(int x, int y, int w, int h) {
+    uint8_t fill = 0xFF;
+    uint8_t upper = 0xFF << (y % 8);
+    uint8_t lower = (1 << ((y + h - 1) % 8 + 1)) - 1;
+
+    int firstPage = y / 8;
+    int lastPage = (y + h - 1) / 8;
+
+    for (int page = firstPage; page <= lastPage; page++) {
+        if (page == firstPage) {
+            fill &= upper;
+        } else if (page == lastPage) {
+            fill &= lower;
+        };
+
+        for (int col = x; col < x + w; col++) {
+            buffer[page][col] |= fill;
+        };
+    };
+};
